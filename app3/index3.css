@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd; /* Biru muda */
+    color: #0d47a1; /* Warna teks biru tua */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #1976d2; /* Warna biru untuk judul */
+}
+
+nav {
+    background-color: #bbdefb; /* Warna latar belakang navbar */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+#status {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #0d47a1; /* Warna link biru tua */
+    font-weight: bold;
+}
+
+a:hover {
+    color: #1976d2; /* Warna link saat hover */
+}
+
+.logo {
+    display: block;
+    margin: 0 auto; /* Memusatkan logo */
+    width: 150px; /* Atur lebar logo */
+}

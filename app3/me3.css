@@ -1,0 +1,45 @@
+/* style.css */
+body {
+    background-color: #e0f7fa; /* Latar belakang biru muda */
+    color: #0277bd; /* Warna teks biru tua */
+    font-family: Arial, sans-serif; /* Font yang digunakan */
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #01579b; /* Warna judul biru gelap */
+    text-align: center; /* Rata tengah */
+}
+
+#main {
+    background-color: #ffffff; /* Latar belakang konten putih */
+    border: 1px solid #b0bec5; /* Border abu-abu */
+    border-radius: 8px; /* Sudut membulat */
+    padding: 20px; /* Padding di dalam konten */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+    margin: 20px auto; /* Margin otomatis di kiri dan kanan */
+    max-width: 600px; /* Lebar maksimum konten */
+}
+
+pre {
+    background-color: #e1f5fe; /* Latar belakang biru muda untuk preformatted text */
+    padding: 10px; /* Padding di dalam preformatted text */
+    border-radius: 4px; /* Sudut membulat */
+    overflow: auto; /* Mengatasi overflow */
+}
+
+a {
+    display: inline-block; /* Menampilkan tautan sebagai blok */
+    margin-top: 20px; /* Margin atas */
+    color: #ffffff; /* Warna teks tautan putih */
+    background-color: #0288d1; /* Latar belakang tautan biru */
+    padding: 10px 15px; /* Padding di dalam tautan */
+    text-decoration: none; /* Menghapus garis bawah */
+    border-radius: 4px; /* Sudut membulat */
+    transition: background-color 0.3s; /* Transisi untuk efek hover */
+}
+
+a:hover {
+    background-color: #0277bd; /* Warna latar belakang saat hover */
+}

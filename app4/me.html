@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BANK: user profile</title>
+    <script src="http://zeptojs.com/zepto.min.js"></script>
+    <script src="http://localhost:8080/js/keycloak.js"></script>
+    <script src="http://localhost:8094/app.js"></script>
+    <link rel="stylesheet" href="me4.css">
+</head>
+<body>
+<h2 id="page-title">BANK: User Info</h2>
+<div id="main"></div>
+<script>
+  $(function () {
+    window.keycloak
+      .init({
+        flow: 'implicit',
+        onLoad: 'check-sso',
+      })
+      .then(function (authenticated) {
+        if (!authenticated) {
+          window.keycloak.logout({
+            'redirectUri': 'http://localhost:8094/index.html'
+          });
+        }
+        window.keycloak
+          .loadUserInfo()
+          .then((data) => {
+            $('#main').after(
+              $('<pre>' + JSON.stringify(data, null, '\t') + '</pre>'),
+              $('<a>', {
+                text: 'back to homepage',
+                href: 'http://localhost:8094',
+              }),
+            );
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch(function () {
+        console.log('failed to initialize');
+      });
+  });
+</script>
+</body>
+</html>

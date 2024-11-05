@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kependudukan: User Profile</title>
+    <!-- Menyertakan library Zepto.js dari CDN untuk manipulasi DOM -->
+    <script src="https://zeptojs.com/zepto.min.js"></script>
+    <!-- Menyertakan library Keycloak.js untuk mengatur SSO Keycloak -->
+    <script src="http://localhost:8080/js/keycloak.js"></script>
+    <!-- Menyertakan file JavaScript app.js untuk fungsi aplikasi tambahan -->
+    <script src="app.js"></script>
+    <!-- Menyertakan stylesheet me.css untuk mengatur gaya halaman -->
+    <link rel="stylesheet" href="me.css" />
+  </head>
+  <body>
+    <h2 id="page-title">Kependudukan: User Info</h2>
+    <div id="user-info">
+      <!-- Di sini kita akan menyisipkan data user terstruktur -->
+    </div>
+    <a href="index.html">Back to homepage</a>
+
+    <script>
+      function displayUserInfo(userData) {
+        // Bersihkan konten dalam div #user-info
+        $('#user-info').empty();
+        
+        // Tampilkan data pengguna dengan format terstruktur
+        for (const [key, value] of Object.entries(userData)) {
+          $('#user-info').append(
+            `<p><strong>${key}:</strong> ${value}</p>`
+          );
+        }
+      }
+
+      $(function () {
+        window.keycloak
+          .init({
+            flow: 'implicit',
+            onLoad: 'check-sso',
+          })
+          .then(function (authenticated) {
+            if (!authenticated) {
+              window.keycloak.logout({
+                redirectUri: window.location.origin + '/local_sso/app1/index.html'
+              });
+            }
+            window.keycloak
+              .loadUserInfo()
+              .then((data) => {
+                // Kirim data pengguna ke save_user.php untuk disimpan atau diambil dari database
+                $.ajax({
+                  url: 'save_user.php',
+                  type: 'POST',
+                  contentType: 'application/json',
+                  data: JSON.stringify(data),
+                  success: function(response) {
+                    const res = JSON.parse(response);
+                    if (res.status === "success") {
+                      // Tampilkan data yang diambil dari database
+                      displayUserInfo(res.data);
+                    } else {
+                      alert(res.message);
+                    }
+                  },
+                  error: function(error) {
+                    console.error(error);
+                    alert('Gagal mengambil data pengguna.');
+                  }
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch(function () {
+            console.log('failed to initialize');
+          });
+      });
+    </script>
+  </body>
+</html>
